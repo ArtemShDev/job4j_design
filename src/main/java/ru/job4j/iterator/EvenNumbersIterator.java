@@ -26,7 +26,7 @@ public class EvenNumbersIterator implements Iterator<Integer> {
         return data[index++];
     }
 
-    private Integer getId() {
+    private int getId() {
         for (int i = index; i < data.length; i++) {
             if (data[i] % 2 == 0) {
                 return i;
