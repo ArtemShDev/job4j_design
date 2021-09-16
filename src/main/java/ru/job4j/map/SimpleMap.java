@@ -42,7 +42,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     }
 
     private void expand() {
-        MapEntry<K, V>[] tableSrc = Arrays.copyOf(table, capacity);
+        MapEntry<K, V>[] tableSrc = table;
         capacity *= 2;
         table = new MapEntry[capacity];
         for (MapEntry<K, V> e : tableSrc) {
