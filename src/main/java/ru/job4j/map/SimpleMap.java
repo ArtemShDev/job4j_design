@@ -22,14 +22,9 @@ public class SimpleMap<K, V> implements Map<K, V> {
             expand();
         }
         int index = indexFor(hash(key.hashCode()));
-        if (table[index] != null && hash(table[index].key.hashCode()) == hash(key.hashCode())
-                && table[index].key.equals(key)) {
+        if (table[index] != null) {
             return false;
         }
-        if (count >= (int) (capacity * LOAD_FACTOR)) {
-            expand();
-        }
-        index = indexFor(hash(key.hashCode()));
         table[index] = new MapEntry<>(key, value);
         count++;
         modCount++;
