@@ -20,14 +20,11 @@ public class Config {
 
     public void load() {
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
-            List<String[]> list = read.lines().filter(s -> s.contains("="))
-                    .map(s -> s.split("="))
-                    .collect(Collectors.toList());
-            for (String[] strArr : list) {
-                if (strArr.length < 2) {
-                    throw new IllegalArgumentException("Format Error key=value");
-                }
-                values.put(strArr[0], strArr[1]);
+            read.lines().filter(s -> s.contains("="))
+                    .forEach(s -> values.put(s.substring(0, s.indexOf("=")),
+                            s.substring(s.indexOf("=") + 1)));
+            if (values.containsKey("") || values.containsValue("")) {
+                throw new IllegalArgumentException("Format Error key=value");
             }
         } catch (IOException e) {
             e.printStackTrace();
