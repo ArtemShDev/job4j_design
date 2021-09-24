@@ -4,16 +4,15 @@ import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.PrintWriter;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class Analizy {
     public void unavailable(String source, String target) {
         try (BufferedReader in = new BufferedReader(new FileReader(source));
              PrintWriter out = new PrintWriter(new FileOutputStream(target))) {
-            List<String[]> list = in.lines().map(s -> s.split(" ")).collect(Collectors.toList());
+            String str = in.readLine();
             String startTime = "";
-            for (String[] arr : list) {
+            while (str != null) {
+                String[] arr = str.split(" ");
                 if (arr[0].equals("400") || arr[0].equals("500")) {
                     if (startTime.equals("")) {
                         startTime = arr[1];
@@ -23,6 +22,7 @@ public class Analizy {
                     startTime = "";
                     out.printf("%s%s%n", arr[1], ";");
                 }
+                str = in.readLine();
             }
         } catch (Exception e) {
             e.printStackTrace();
