@@ -9,9 +9,9 @@ public class Analizy {
     public void unavailable(String source, String target) {
         try (BufferedReader in = new BufferedReader(new FileReader(source));
              PrintWriter out = new PrintWriter(new FileOutputStream(target))) {
-            String str = in.readLine();
             String startTime = "";
-            while (str != null) {
+            while (in.ready()) {
+                String str = in.readLine();
                 String[] arr = str.split(" ");
                 if (arr[0].equals("400") || arr[0].equals("500")) {
                     if (startTime.equals("")) {
@@ -22,7 +22,6 @@ public class Analizy {
                     startTime = "";
                     out.printf("%s%s%n", arr[1], ";");
                 }
-                str = in.readLine();
             }
         } catch (Exception e) {
             e.printStackTrace();
