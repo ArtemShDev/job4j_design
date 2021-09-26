@@ -1,6 +1,5 @@
 package ru.job4j.io;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +12,7 @@ public class ArgsName {
         return values.get(key);
     }
 
-    private void parse(String[] args) throws IOException {
+    private void parse(String[] args) {
         if (args.length == 0) {
             throw new IllegalArgumentException("Please, enter arguments for call function!");
         }
@@ -26,11 +25,7 @@ public class ArgsName {
 
     public static ArgsName of(String[] args) {
         ArgsName names = new ArgsName();
-        try {
-            names.parse(args);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        names.parse(args);
         return names;
     }
 
