@@ -16,9 +16,12 @@ public class ArgsName {
         if (args.length == 0) {
             throw new IllegalArgumentException("Please, enter arguments for call function!");
         }
-        Arrays.stream(args).forEach(s -> values.put(
-                s.substring(1, s.indexOf("=")), s.substring(s.indexOf("=") + 1)));
-        if (values.containsValue("")) {
+        Arrays.stream(args).forEach(s -> {
+            int q = s.indexOf("=");
+            values.put(
+                s.substring((q == 0 ? 0 : 1), q), s.substring(q + 1));
+        });
+        if (values.containsKey("") || values.containsValue("")) {
             throw new IllegalArgumentException("Error format arguments (key=value)!");
         }
     }
