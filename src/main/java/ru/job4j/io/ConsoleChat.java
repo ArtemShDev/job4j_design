@@ -24,11 +24,11 @@ public class ConsoleChat {
 
     public void run() {
         Scanner scanner = new Scanner(in);
-        String word;
         String command = "";
         List<String> log = new ArrayList<>();
         List<String> phrases = readPhrases();
-        while (!(word = scanner.next()).equals(OUT)) {
+        String word = scanner.next();
+        while (!word.equals(OUT)) {
             log.add(word);
             command = word.equals(STOP) || word.equals(CONTINUE) ? word : command;
             if (!command.equals(STOP)) {
@@ -36,6 +36,7 @@ public class ConsoleChat {
                 log.add(phrase);
                 System.out.println(phrase);
             }
+            word = scanner.next();
         }
         log.add(word);
         saveLog(log);
