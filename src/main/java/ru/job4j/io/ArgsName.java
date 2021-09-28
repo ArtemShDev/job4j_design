@@ -12,8 +12,8 @@ public class ArgsName {
         return values.get(key);
     }
 
-    public int getCountArgs() {
-        return values.size();
+    public Map<String, String> getMapArgs() {
+        return values;
     }
 
     private void parse(String[] args) {
