@@ -25,8 +25,8 @@ public class CSVReaderTest {
         File file = temporaryFolder.newFile("source.csv");
         File target = temporaryFolder.newFile("target.csv");
         ArgsName argsName = ArgsName.of(new String[]{
-                "-path=" + file.getAbsolutePath(), "-delimiter=;", "-out=" +
-                target.getAbsolutePath(), "-filter=name,age"
+                "-path=" + file.getAbsolutePath(), "-delimiter=;", "-out="
+                + target.getAbsolutePath(), "-filter=name,age"
         });
         Files.writeString(file.toPath(), data);
         String expected = String.join(
@@ -52,8 +52,8 @@ public class CSVReaderTest {
         File file = temporaryFolder.newFile("source.csv");
         File target = temporaryFolder.newFile("target.csv");
         ArgsName argsName = ArgsName.of(new String[]{
-                "-path=" + file.getAbsolutePath(), "-delimiter=;", "-out=" +
-                target.getAbsolutePath(), "-filter=last_name,education"
+                "-path=" + file.getAbsolutePath(), "-delimiter=;", "-out="
+                + target.getAbsolutePath(), "-filter=last_name,education"
         });
         Files.writeString(file.toPath(), data);
         String expected = String.join(
@@ -79,8 +79,8 @@ public class CSVReaderTest {
         File file = temporaryFolder.newFile("source.csv");
         File target = temporaryFolder.newFile("target.csv");
         ArgsName argsName = ArgsName.of(new String[]{
-                "-path=" + file.getAbsolutePath(), "-delimiter=;", "-out=" +
-                target.getAbsolutePath(), "-filter=last_name,education,age"
+                "-path=" + file.getAbsolutePath(), "-delimiter=;", "-out="
+                + target.getAbsolutePath(), "-filter=last_name,education,age"
         });
         Files.writeString(file.toPath(), data);
         String expected = String.join(
