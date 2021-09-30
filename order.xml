@@ -1,0 +1,10 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<order isPaid="true" price="78544.55">
+    <consumer>Bob</consumer>
+    <contact phone="555-777"/>
+    <purchases>
+        <purchase>stones</purchase>
+        <purchase>cement</purchase>
+        <purchase>glue</purchase>
+    </purchases>
+</order>
