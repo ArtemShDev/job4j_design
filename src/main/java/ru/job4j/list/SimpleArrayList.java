@@ -69,13 +69,13 @@ public class SimpleArrayList<T> implements List<T> {
             }
 
             @Override
-            public T next() {
-                if (!hasNext()) {
-                   throw new NoSuchElementException();
-                }
-                if (expectedModCount != modCount) {
-                    throw new ConcurrentModificationException();
-                }
+                     public T next() {
+                        if (!hasNext()) {
+                            throw new NoSuchElementException();
+                        }
+                        if (expectedModCount != modCount) {
+                            throw new ConcurrentModificationException();
+                        }
                 return container[count++];
             }
 
