@@ -75,6 +75,7 @@ public class Order {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
+
         Order order = (Order) o;
         return Float.compare(order.price, price) == 0 && isPaid == order.isPaid
                 && Objects.equals(contact, order.contact)
