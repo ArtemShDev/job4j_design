@@ -1,5 +1,6 @@
 package ru.job4j.io.exam;
 
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.nio.file.Path;
@@ -14,25 +15,30 @@ public class Finder {
     public static void main(String[] args) {
         try {
             Map<String, String> mapArgs = validate(args);
-            Path start = Paths.get(mapArgs.get("d"));
-            String mask = mapArgs.get("t");
-            String logFile = mapArgs.get("o");
-            String filter = mapArgs.get("n");
-            Predicate<Path> pr = p -> p.toFile().getName().equals(filter);
-            if (mask.equals("regex")) {
-                Pattern pattern = Pattern.compile(mask);
-                pr = p -> Pattern.matches(filter, p.toFile().getName());
-            } else if (mask.equals("mask")) {
-                pr = p -> p.toFile().getName().endsWith(filter.substring(1));
-            }
-            List<Path> searchFiles = Search.search(start, pr);
-            try (PrintWriter out = new PrintWriter(new FileOutputStream(logFile))) {
-                for (Path path : searchFiles) {
-                    out.printf("%s%n", path);
-                }
-            }
+            List<Path> searchFiles = Search.search(Paths.get(mapArgs.get("d")),
+                    predicateBuilder(mapArgs.get("n"), mapArgs.get("t")));
+            writeResult(mapArgs.get("o"), searchFiles);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private static Predicate<Path> predicateBuilder(String filter, String mask) {
+        Predicate<Path> pr = p -> p.toFile().getName().equals(filter);
+        if (mask.equals("regex")) {
+            Pattern pattern = Pattern.compile(mask);
+            pr = p -> Pattern.matches(filter, p.toFile().getName());
+        } else if (mask.equals("mask")) {
+            pr = p -> p.toFile().getName().endsWith(filter.substring(1));
+        }
+        return pr;
+    }
+
+    private static void writeResult(String logFile, List<Path> searchFiles) throws Exception {
+        try (PrintWriter out = new PrintWriter(new FileOutputStream(logFile))) {
+            for (Path path : searchFiles) {
+                out.printf("%s%n", path);
+            }
         }
     }
 
