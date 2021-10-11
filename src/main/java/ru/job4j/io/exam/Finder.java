@@ -13,7 +13,8 @@ public class Finder {
 
     public static void main(String[] args) {
         try {
-            Map<String, String> mapArgs = validate(args);
+            Map<String, String> mapArgs = mapBuilder(args);
+            validate(mapArgs);
             List<Path> searchFiles = Search.search(Paths.get(mapArgs.get("d")),
                     predicateBuilder(mapArgs.get("n"), mapArgs.get("t")));
             writeResult(mapArgs.get("o"), searchFiles);
@@ -41,15 +42,18 @@ public class Finder {
         }
     }
 
-    private static Map<String, String> validate(String[] args) throws Exception {
+    private static Map<String, String> mapBuilder(String[] args) {
         ArgsName argsName = ArgsName.of(args);
-        Map<String, String> mapArgs = argsName.getMapArgs();
+        return argsName.getMapArgs();
+    }
+
+    private static void validate(Map<String, String> mapArgs) throws Exception {
         if (!(mapArgs.containsKey("d") && mapArgs.containsKey("n")
                 && mapArgs.containsKey("t") && mapArgs.containsKey("o"))) {
             throw new IllegalArgumentException("Please, enter 4 arguments for call function "
                     + "Example: ... -d=c:/ -n=*.txt -t=mask -o=log.txt (directory, filter, mask, log file)!");
         }
-        Path scan = Paths.get(argsName.get("d"));
+        Path scan = Paths.get(mapArgs.get("d"));
         if (!scan.toFile().exists()) {
             throw new IllegalArgumentException(String.format("Path %s is not exist!",
                     scan.toAbsolutePath()));
@@ -59,6 +63,5 @@ public class Finder {
             throw new IllegalArgumentException(String.format("Mask should be %s or %s or %s !",
                     "\"mask\"", "\"name\"", "\"regex\""));
         }
-        return mapArgs;
     }
 }
