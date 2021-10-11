@@ -1,6 +1,5 @@
 package ru.job4j.io.exam;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.nio.file.Path;
