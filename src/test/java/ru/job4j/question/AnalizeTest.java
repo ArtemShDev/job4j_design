@@ -80,7 +80,6 @@ public class AnalizeTest {
         User u2 = new User(2, "B");
         User u3 = new User(3, "C");
         User u4 = new User(4, "D");
-        //User u5 = new User(5, "E");
         Set<User> previous = Set.of(u1, u2, u3, u4);
         Set<User> current = Set.of(new User(1, "AA"), new User(4, "DD"), new User(5, "E"));
         assertThat(
