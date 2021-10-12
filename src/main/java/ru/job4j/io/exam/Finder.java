@@ -25,11 +25,9 @@ public class Finder {
 
     private static Predicate<Path> predicateBuilder(String filter, String mask) {
         Predicate<Path> pr = p -> p.toFile().getName().equals(filter);
-        if (mask.equals("regex")) {
-            Pattern pattern = Pattern.compile(mask);
-            pr = p -> Pattern.matches(filter, p.toFile().getName());
-        } else if (mask.equals("mask")) {
-            pr = p -> p.toFile().getName().endsWith(filter.substring(1));
+        if (mask.equals("regex") || mask.equals("mask")) {
+            String modifFilter = filter.replace("?", ".").replace("*", ".+?");
+            pr = p -> Pattern.matches(modifFilter, p.toFile().getName());
         }
         return pr;
     }
